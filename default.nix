@@ -12,7 +12,7 @@ let
 
   pinned = import pkgs {
     overlays = [
-      (import ./overlay-fetch.nix)
+      (import ./overlay-fetch2.nix)
     ];
     config = {
       allowUnfree = true;
@@ -23,7 +23,8 @@ let
     inherit (pinned) cargo rustc;
   };
 
-  vendor = pinned.fetchCargoVendor {
+  #vendor = pinned.fetchCargoVendor {
+  vendor = rustPlatform.fetchCargoVendor {
     name = "vendored";
     src = pinned.lib.cleanSource ./.;
     #hash = "sha256-mS4jO+HBYqVEWQO9PrzG08WI02NEP5NWcdhcpNhg8Jc=";
