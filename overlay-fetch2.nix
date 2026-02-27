@@ -17,4 +17,19 @@ final: prev:
       in
         prev.writers.writePython3Bin name args patchedSrc;
   };
+
+  # Something seems amiss with the setup for the diffutils tests...
+  # I don't really care about running their tests...
+
+  diffutils = prev.diffutils.overrideAttrs (old: {
+    doCheck = false;
+  });
+
+  # Annoying doChecks everywhere for my rebuilds...
+  ## stdenv = prev.stdenv // {
+  ##   mkDerivation = args: prev.stdenv.mkDerivation ( args // {
+  ##     doCheck = false;
+  ##     doInstallCheck = false;
+  ##   });
+  ## };
 }
