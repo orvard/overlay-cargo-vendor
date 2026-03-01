@@ -1,0 +1,9 @@
+[package]
+name = "nested-crate"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+pcap = "2.4.0"
+pnet = "0.35.0"
+ureq = "3.2.0"

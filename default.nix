@@ -53,15 +53,14 @@ let
   #vendor = pinned.fetchCargoVendor {
   vendor = rustPlatform.fetchCargoVendor {
     name = "vendored";
-    src = pinned.lib.cleanSource ./.;
-    #hash = "sha256-mS4jO+HBYqVEWQO9PrzG08WI02NEP5NWcdhcpNhg8Jc=";
-    hash = "sha256-mS4jO+HBYqVEWQO9PrzG08WI02NEP5NWcdhcpNhg8Jc="; #pinned.lib.fakeHash; #"sha256-DymUo949FuiU6800aw6sTfdxt6MbNRs3zOE1rirluFE=";
+    src = pinned.lib.cleanSource ./nested-crate;
+    hash = "sha256-OFztwgUhOX/nmMAIXSiT6vvhueXq7STBU29J+sEK7CE=";
   };
 
   rust-project = rustPlatform.buildRustPackage {
     pname = "aaa";
     version = "1.0.0";
-    src = ./.;
+    src = pinned.lib.cleanSource ./nested-crate;
 
     cargoDeps = vendor;
 
@@ -78,13 +77,6 @@ let
       zlib
     ];
 
-    # Maybe this is wrong..
-    #meta = {
-    #  pkgConfigModules = [
-    #    libpcap
-    #    zlib
-    #  ];
-    #};
   };
 in
   rust-project
